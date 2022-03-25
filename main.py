@@ -17,10 +17,12 @@ while len(guessed_states) < 50:
                                     prompt="What's another state name").title()
 
     if answer_state == "Exit":
-        missing_state = []
-        for state in all_states:
-            if state not in guessed_states:
-                missing_state.append(state)
+        missing_states = [state for state in all_states if state not in guessed_states]
+        # for state in all_states:
+        # if state not in guessed_states:
+        # missing_state.append(state)
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn")
         break
     if answer_state in all_states:
         guessed_states.append(answer_state)
@@ -34,7 +36,7 @@ while len(guessed_states) < 50:
 
 screen.exitonclick()
 
-#if answer_state is one of the states in all the states of 50_states.csv
+# if answer_state is one of the states in all the states of 50_states.csv
 #   if they got it right:
 #       Create a turtle to write the name of the state at the state's x and y coordinate
 
